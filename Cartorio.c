@@ -11,44 +11,68 @@ int registra(){  //funçao para registrar novos usuarios
 	char nome[40];
 	char sobrenome[40];
 	char cargo[40];
+	int y = 1;
 	
 	setlocale(LC_ALL,"Portuguese");  //definir linguagem
 	
-	printf("Digite o CPF a ser cadastrado: ");  //Coletando informação do usuario
-	scanf("%s", cpf);
+	while(y==1){
 	
-	strcpy(arquivo, cpf); //Responsável por copiar os valores das strings
-	
-	FILE *file;  //cria o arquivo
-	file= fopen(arquivo, "w");  //cria o arquivo e escreve usando a função "w"
-	fprintf(file, cpf);  //salvo o valor da variavel
-	fprintf(file,"\n");  //pula uma linha no arquivo salvo
-	fclose(file);  //fecha o arquivo
-	
-	printf("Digite o nome a ser cadastrado: ");
-	scanf("%s", nome);
-	nome[0] = toupper(nome[0]);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file,nome);  //adiciona o nome cadastrado ao arquivo salvo
-	fprintf(file," ");  //adiciona " " ao arquivo salvo
-	fclose(file);
-	
-	printf("Digite o sobrenome a ser cadastrado(apenas 1 sobrenome): ");
-	scanf("%s", sobrenome);
-	sobrenome[0] = toupper(sobrenome[0]);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file,sobrenome);  //adiciona o sobrenome cadastrado ao arquivo salvo
-	fprintf(file,"\n");  //pula uma linha no arquivo salvo
-	fclose(file);
-	
-	printf("Digite o cargo a ser cadastrado: ");
-	scanf("%s", cargo);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file,cargo);  //adiciona o cargo cadastrado ao arquivo salvo
-	fclose(file);
+		system("cls");
+		
+		printf("Digite o CPF a ser cadastrado: ");  //Coletando informação do usuario
+		scanf("%s", cpf);
+		
+		strcpy(arquivo, cpf); //Responsável por copiar os valores das strings
+		
+		FILE *file;  //cria o arquivo
+		file= fopen(arquivo, "w");  //cria o arquivo e escreve usando a função "w"
+		fprintf(file, cpf);  //salvo o valor da variavel
+		fprintf(file,"\n");  //pula uma linha no arquivo salvo
+		fclose(file);  //fecha o arquivo
+		
+		printf("Digite o nome a ser cadastrado: ");
+		scanf("%s", nome);
+		nome[0] = toupper(nome[0]);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file,nome);  //adiciona o nome cadastrado ao arquivo salvo
+		fprintf(file," ");  //adiciona " " ao arquivo salvo
+		fclose(file);
+		
+		printf("Digite o sobrenome a ser cadastrado(apenas 1 sobrenome): ");
+		scanf("%s", sobrenome);
+		sobrenome[0] = toupper(sobrenome[0]);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file,sobrenome);  //adiciona o sobrenome cadastrado ao arquivo salvo
+		fprintf(file,"\n");  //pula uma linha no arquivo salvo
+		fclose(file);
+		
+		printf("Digite o cargo a ser cadastrado: ");
+		scanf("%s", cargo);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file,cargo);  //adiciona o cargo cadastrado ao arquivo salvo
+		fclose(file);
+		
+		system("cls");
+		printf("Usuário cadastrado com sucesso\n");
+		system("pause");
+		y = 3;
+		while(y != 1 && y != 2 ){
+			system("cls");
+			
+			printf("Deseja consultar outro usuário?\n");
+			printf("\t1 - Sim \n");
+			printf("\t2 - Não \n");
+			scanf("%d",&y);
+			
+			if(y != 1 && y != 2){
+				printf("Opção invalida, escolha entre as opções disponiveis\n");
+				system("pause");
+			}
+		}	
+	}
 		
 }
 
@@ -57,70 +81,113 @@ int consulta(){  //função para consultar usuario registrados
 	char cpf[12];
 	char conteudo[200];
 	int x = 0;
+	int y = 1;
 	
 	setlocale(LC_ALL,"Portuguese");  //definir linguagem
 	
-	printf("Digite o CPF a ser consultado: ");  //pede ao usuario um CPF para consultar no banco de dados
-	scanf("%s", cpf);  
-	
-	FILE *file;
-	file = fopen(cpf, "r");  //le o banco de dados em busca do cpf solicitado
-	
-	if(file == NULL){
-		printf("CPF nao localizado!\n");  //informa o usuario que o CPF nao existe no sistema
-	}
-	
-	while(fgets(conteudo, 200, file) != NULL){
+	while(y==1){
+		system("cls");
 		
+		printf("Digite o CPF a ser consultado: ");  //pede ao usuario um CPF para consultar no banco de dados
+		scanf("%s", cpf);  
 		
-		switch(x){
-			case 0:
-				printf("\nEssas são as informações do usuario consultado: ");
-				printf("\n\n");
-				printf("CPF do usuario consultado: %s",conteudo);  //mostra ao usuario o CPF consultado
-				break;
-			
-			case 1:
-				printf("Nome do usuario consultado: %s",conteudo);  //mostra ao usuario o Nome consultado
-				break;	
-			
-			case 2:
-				printf("Cargo do usuario consultado: %s",conteudo);  //mostra ao usuario o Cargo consultado
-				printf("\n\n");
-				break;	
-				
-			default:
-				break;	
+		FILE *file;
+		file = fopen(cpf, "r");  //le o banco de dados em busca do cpf solicitado
+		
+		if(file == NULL){
+			printf("CPF nao localizado!\n");  //informa o usuario que o CPF nao existe no sistema
 		}
 		
-		
-		
-		x += 1;   
+		while(fgets(conteudo, 200, file) != NULL){
+			
+			
+			switch(x){
+				case 0:
+					printf("\nEssas são as informações do usuario consultado: ");
+					printf("\n\n");
+					printf("CPF do usuario consultado: %s",conteudo);  //mostra ao usuario o CPF consultado
+					break;
+				
+				case 1:
+					printf("Nome do usuario consultado: %s",conteudo);  //mostra ao usuario o Nome consultado
+					break;	
+				
+				case 2:
+					printf("Cargo do usuario consultado: %s",conteudo);  //mostra ao usuario o Cargo consultado
+					printf("\n\n");
+					break;	
+					
+				default:
+					break;	
+			}
+			
+			
+			
+			x += 1;   
+		}
+		system("pause");
+		x = 0;
+		y = 3;
+		while(y != 1 && y != 2 ){
+			system("cls");
+			
+			printf("Deseja consultar outro usuário?\n");
+			printf("\t1 - Sim \n");
+			printf("\t2 - Não \n");
+			scanf("%d",&y);
+			
+			if(y != 1 && y != 2){
+				printf("Opção invalida, escolha entre as opções disponiveis\n");
+				system("pause");
+			}
+		}
 	}
-	
-	system("pause");
 }
 
 int deleta(){  //função para deletar usuarios registrados
 	
 	char cpf[12];
-	
-	printf("Digite o CPF a ser deletado: ");  // solicita o CPF a ser deletado ao usuario
-	scanf("%s", cpf);  // salva o CPF na variavel cpf
+	int x = 1;
 	
 	
-	FILE *file;
-	file = fopen(cpf, "r");
+	while(x == 1){
 	
-	if(file == NULL){
-		printf("CPF não encontrado no sistema.\n");  //avisa o usuario caso o CPF não esteja cadastrado
+		system("cls");
+		
+		printf("Digite o CPF a ser deletado: ");  // solicita o CPF a ser deletado ao usuario
+		scanf("%s", cpf);  // salva o CPF na variavel cpf
+		
+		
+		FILE *file;
+		file = fopen(cpf, "r");
+		
+		if(file == NULL){
+			printf("CPF não encontrado no sistema.\n");  //avisa o usuario caso o CPF não esteja cadastrado
+			system("pause");
+		}
+		
+		fclose(file);
+		remove(cpf);  //deleta o arquivo relacionado ao CPF digitado pelo usuario
+		
+		printf("\nUsuário deletado com sucesso!\n\n");  //avisa ao usuario que o CPF solicitado foi deletado
 		system("pause");
+		
+		x = 3;
+		
+		while(x != 1 && x != 2 ){
+			system("cls");
+			
+			printf("Deseja deletar outro usuário?\n");
+			printf("\t1 - Sim \n");
+			printf("\t2 - Não \n");
+			scanf("%d",&x);
+			
+			if(x != 1 && x != 2){
+				printf("Opção invalida, escolha entre as opções disponiveis\n");
+				system("pause");
+			}
+		}
 	}
-	
-	remove(cpf);  //deleta o arquivo relacionado ao CPF digitado pelo usuario
-	
-	printf("\nUsuário deletado com sucesso!\n\n");  //avisa ao usuario que o CPF solicitado foi deletado
-	system("pause");
 }
 
 int main(){
