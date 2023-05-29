@@ -150,6 +150,7 @@ int consultaColaborador(){  //função para consultar colaboradores registrados
 				system("pause");
 			}
 		}
+		file = fclose(file);
 	}
 }
 
